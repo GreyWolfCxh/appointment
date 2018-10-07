@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comit.appointment.modules.sys.dao.RecordsMapper" >
+  <resultMap id="BaseResultMap" type="com.comit.appointment.modules.sys.entity.Records" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="USER_CODE" property="USER_CODE" jdbcType="VARCHAR" />
+    <result column="USER_PHONE" property="USER_PHONE" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="USER_NAME" jdbcType="VARCHAR" />
+    <result column="USER_CARDID" property="USER_CARDID" jdbcType="VARCHAR" />
+    <result column="USER_ADDRESS" property="USER_ADDRESS" jdbcType="VARCHAR" />
+    <result column="CAR_NUMBER" property="CAR_NUMBER" jdbcType="VARCHAR" />
+    <result column="ILLEGAL_TYPE" property="ILLEGAL_TYPE" jdbcType="VARCHAR" />
+    <result column="ILLEGAL_REASON" property="ILLEGAL_REASON" jdbcType="VARCHAR" />
+    <result column="ILLEGAL_TIME" property="ILLEGAL_TIME" jdbcType="DATE" />
+    <result column="APPOINTMENT_ADDRESS" property="APPOINTMENT_ADDRESS" jdbcType="VARCHAR" />
+    <result column="APPOINTMENT_WINDOW" property="APPOINTMENT_WINDOW" jdbcType="VARCHAR" />
+    <result column="TIME" property="TIME" jdbcType="VARCHAR" />
+    <result column="VALID_TIME" property="VALID_TIME" jdbcType="VARCHAR" />
+    <result column="APPOINTMENT_DAY" property="APPOINTMENT_DAY" jdbcType="DATE" />
+    <result column="OPERATOR_DAY" property="OPERATOR_DAY" jdbcType="DATE" />
+    <result column="APPOINTMENT_CODE" property="APPOINTMENT_CODE" jdbcType="VARCHAR" />
+    <result column="STATUS" property="STATUS" jdbcType="INTEGER" />
+    <result column="REMARKS1" property="REMARKS1" jdbcType="VARCHAR" />
+    <result column="REMARKS2" property="REMARKS2" jdbcType="VARCHAR" />
+    <result column="REMARKS3" property="REMARKS3" jdbcType="VARCHAR" />
+    <result column="REMARKS4" property="REMARKS4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_CODE, USER_PHONE, USER_NAME, USER_CARDID, USER_ADDRESS, CAR_NUMBER, ILLEGAL_TYPE, 
+    ILLEGAL_REASON, ILLEGAL_TIME, APPOINTMENT_ADDRESS, APPOINTMENT_WINDOW, TIME, VALID_TIME, 
+    APPOINTMENT_DAY, OPERATOR_DAY, APPOINTMENT_CODE, STATUS, REMARKS1, REMARKS2, REMARKS3, 
+    REMARKS4
+  </sql>
+  
+  <!-- sql -->
+  
+    <!-- 通过条件分页查询，返回总记录数 -->
+  <select id="selectPageCount" parameterType="com.comit.appointment.modules.sys.entity.Page"  resultType="java.lang.Integer">
+    select count(1) from record
+    <where>
+    	<if test="params.APPOINTMENT_CODE !=null and params.APPOINTMENT_CODE!='' ">
+			and APPOINTMENT_CODE like concat('%',#{params.APPOINTMENT_CODE},'%')
+		</if>
+		<if test="params.USER_NAME!=null and params.USER_NAME!='' ">
+			and USER_NAME like concat('%',#{params.USER_NAME},'%')
+		</if>
+		<if test="params.USER_PHONE !=null and params.USER_PHONE!='' ">
+			and USER_PHONE like concat('%',#{params.USER_PHONE},'%')
+		</if>
+		<if test="params.CAR_NUMBER!=null and params.CAR_NUMBER!='' ">
+			and CAR_NUMBER like concat('%',#{params.CAR_NUMBER},'%')
+		</if>
+	</where>
+  </select>
+    <!--查找记录列表  -->
+    <select id="selectPage" resultMap="BaseResultMap" parameterType="com.comit.appointment.modules.sys.entity.Page" >
+    select 
+    <include refid="Base_Column_List" />
+    from record
+     <where>
+    	<if test="params.APPOINTMENT_CODE !=null and params.APPOINTMENT_CODE!='' ">
+			and APPOINTMENT_CODE like concat('%',#{params.APPOINTMENT_CODE},'%')
+		</if>
+		<if test="params.USER_NAME!=null and params.USER_NAME!='' ">
+			and USER_NAME like concat('%',#{params.USER_NAME},'%')
+		</if>
+		<if test="params.USER_PHONE !=null and params.USER_PHONE!='' ">
+			and USER_PHONE like concat('%',#{params.USER_PHONE},'%')
+		</if>
+		<if test="params.CAR_NUMBER!=null and params.CAR_NUMBER!='' ">
+			and CAR_NUMBER like concat('%',#{params.CAR_NUMBER},'%')
+		</if>
+	</where>
+	ORDER BY ID DESC
+	 limit #{start},#{rows}
+  </select>
+  
+  <!-- end -->
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from record
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from record
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.comit.appointment.modules.sys.entity.Records" >
+    insert into record (ID, USER_CODE, USER_PHONE, 
+      USER_NAME, USER_CARDID, USER_ADDRESS, 
+      CAR_NUMBER, ILLEGAL_TYPE, ILLEGAL_REASON, 
+      ILLEGAL_TIME, APPOINTMENT_ADDRESS, APPOINTMENT_WINDOW, 
+      TIME, VALID_TIME, APPOINTMENT_DAY, 
+      OPERATOR_DAY, APPOINTMENT_CODE, STATUS, 
+      REMARKS1, REMARKS2, REMARKS3, 
+      REMARKS4)
+    values (#{ID,jdbcType=INTEGER}, #{USER_CODE,jdbcType=VARCHAR}, #{USER_PHONE,jdbcType=VARCHAR}, 
+      #{USER_NAME,jdbcType=VARCHAR}, #{USER_CARDID,jdbcType=VARCHAR}, #{USER_ADDRESS,jdbcType=VARCHAR}, 
+      #{CAR_NUMBER,jdbcType=VARCHAR}, #{ILLEGAL_TYPE,jdbcType=VARCHAR}, #{ILLEGAL_REASON,jdbcType=VARCHAR}, 
+      #{ILLEGAL_TIME,jdbcType=DATE}, #{APPOINTMENT_ADDRESS,jdbcType=VARCHAR}, #{APPOINTMENT_WINDOW,jdbcType=VARCHAR}, 
+      #{TIME,jdbcType=VARCHAR}, #{VALID_TIME,jdbcType=VARCHAR}, #{APPOINTMENT_DAY,jdbcType=DATE}, 
+      #{OPERATOR_DAY,jdbcType=DATE}, #{APPOINTMENT_CODE,jdbcType=VARCHAR}, #{STATUS,jdbcType=INTEGER}, 
+      #{REMARKS1,jdbcType=VARCHAR}, #{REMARKS2,jdbcType=VARCHAR}, #{REMARKS3,jdbcType=VARCHAR}, 
+      #{REMARKS4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comit.appointment.modules.sys.entity.Records" >
+    insert into record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="USER_CODE != null" >
+        USER_CODE,
+      </if>
+      <if test="USER_PHONE != null" >
+        USER_PHONE,
+      </if>
+      <if test="USER_NAME != null" >
+        USER_NAME,
+      </if>
+      <if test="USER_CARDID != null" >
+        USER_CARDID,
+      </if>
+      <if test="USER_ADDRESS != null" >
+        USER_ADDRESS,
+      </if>
+      <if test="CAR_NUMBER != null" >
+        CAR_NUMBER,
+      </if>
+      <if test="ILLEGAL_TYPE != null" >
+        ILLEGAL_TYPE,
+      </if>
+      <if test="ILLEGAL_REASON != null" >
+        ILLEGAL_REASON,
+      </if>
+      <if test="ILLEGAL_TIME != null" >
+        ILLEGAL_TIME,
+      </if>
+      <if test="APPOINTMENT_ADDRESS != null" >
+        APPOINTMENT_ADDRESS,
+      </if>
+      <if test="APPOINTMENT_WINDOW != null" >
+        APPOINTMENT_WINDOW,
+      </if>
+      <if test="TIME != null" >
+        TIME,
+      </if>
+      <if test="VALID_TIME != null" >
+        VALID_TIME,
+      </if>
+      <if test="APPOINTMENT_DAY != null" >
+        APPOINTMENT_DAY,
+      </if>
+      <if test="OPERATOR_DAY != null" >
+        OPERATOR_DAY,
+      </if>
+      <if test="APPOINTMENT_CODE != null" >
+        APPOINTMENT_CODE,
+      </if>
+      <if test="STATUS != null" >
+        STATUS,
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1,
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2,
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3,
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="USER_CODE != null" >
+        #{USER_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_PHONE != null" >
+        #{USER_PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_NAME != null" >
+        #{USER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_CARDID != null" >
+        #{USER_CARDID,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_ADDRESS != null" >
+        #{USER_ADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="CAR_NUMBER != null" >
+        #{CAR_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="ILLEGAL_TYPE != null" >
+        #{ILLEGAL_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="ILLEGAL_REASON != null" >
+        #{ILLEGAL_REASON,jdbcType=VARCHAR},
+      </if>
+      <if test="ILLEGAL_TIME != null" >
+        #{ILLEGAL_TIME,jdbcType=DATE},
+      </if>
+      <if test="APPOINTMENT_ADDRESS != null" >
+        #{APPOINTMENT_ADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="APPOINTMENT_WINDOW != null" >
+        #{APPOINTMENT_WINDOW,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        #{TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="VALID_TIME != null" >
+        #{VALID_TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="APPOINTMENT_DAY != null" >
+        #{APPOINTMENT_DAY,jdbcType=DATE},
+      </if>
+      <if test="OPERATOR_DAY != null" >
+        #{OPERATOR_DAY,jdbcType=DATE},
+      </if>
+      <if test="APPOINTMENT_CODE != null" >
+        #{APPOINTMENT_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="STATUS != null" >
+        #{STATUS,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comit.appointment.modules.sys.entity.Records" >
+    update record
+    <set >
+      <if test="USER_CODE != null" >
+        USER_CODE = #{USER_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_PHONE != null" >
+        USER_PHONE = #{USER_PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_NAME != null" >
+        USER_NAME = #{USER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_CARDID != null" >
+        USER_CARDID = #{USER_CARDID,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_ADDRESS != null" >
+        USER_ADDRESS = #{USER_ADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="CAR_NUMBER != null" >
+        CAR_NUMBER = #{CAR_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="ILLEGAL_TYPE != null" >
+        ILLEGAL_TYPE = #{ILLEGAL_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="ILLEGAL_REASON != null" >
+        ILLEGAL_REASON = #{ILLEGAL_REASON,jdbcType=VARCHAR},
+      </if>
+      <if test="ILLEGAL_TIME != null" >
+        ILLEGAL_TIME = #{ILLEGAL_TIME,jdbcType=DATE},
+      </if>
+      <if test="APPOINTMENT_ADDRESS != null" >
+        APPOINTMENT_ADDRESS = #{APPOINTMENT_ADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="APPOINTMENT_WINDOW != null" >
+        APPOINTMENT_WINDOW = #{APPOINTMENT_WINDOW,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        TIME = #{TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="VALID_TIME != null" >
+        VALID_TIME = #{VALID_TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="APPOINTMENT_DAY != null" >
+        APPOINTMENT_DAY = #{APPOINTMENT_DAY,jdbcType=DATE},
+      </if>
+      <if test="OPERATOR_DAY != null" >
+        OPERATOR_DAY = #{OPERATOR_DAY,jdbcType=DATE},
+      </if>
+      <if test="APPOINTMENT_CODE != null" >
+        APPOINTMENT_CODE = #{APPOINTMENT_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="STATUS != null" >
+        STATUS = #{STATUS,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4 = #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comit.appointment.modules.sys.entity.Records" >
+    update record
+    set USER_CODE = #{USER_CODE,jdbcType=VARCHAR},
+      USER_PHONE = #{USER_PHONE,jdbcType=VARCHAR},
+      USER_NAME = #{USER_NAME,jdbcType=VARCHAR},
+      USER_CARDID = #{USER_CARDID,jdbcType=VARCHAR},
+      USER_ADDRESS = #{USER_ADDRESS,jdbcType=VARCHAR},
+      CAR_NUMBER = #{CAR_NUMBER,jdbcType=VARCHAR},
+      ILLEGAL_TYPE = #{ILLEGAL_TYPE,jdbcType=VARCHAR},
+      ILLEGAL_REASON = #{ILLEGAL_REASON,jdbcType=VARCHAR},
+      ILLEGAL_TIME = #{ILLEGAL_TIME,jdbcType=DATE},
+      APPOINTMENT_ADDRESS = #{APPOINTMENT_ADDRESS,jdbcType=VARCHAR},
+      APPOINTMENT_WINDOW = #{APPOINTMENT_WINDOW,jdbcType=VARCHAR},
+      TIME = #{TIME,jdbcType=VARCHAR},
+      VALID_TIME = #{VALID_TIME,jdbcType=VARCHAR},
+      APPOINTMENT_DAY = #{APPOINTMENT_DAY,jdbcType=DATE},
+      OPERATOR_DAY = #{OPERATOR_DAY,jdbcType=DATE},
+      APPOINTMENT_CODE = #{APPOINTMENT_CODE,jdbcType=VARCHAR},
+      STATUS = #{STATUS,jdbcType=INTEGER},
+      REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      REMARKS4 = #{REMARKS4,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

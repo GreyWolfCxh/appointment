@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comit.appointment.modules.sys.dao.OperatersMapper" >
+  <resultMap id="BaseResultMap" type="com.comit.appointment.modules.sys.entity.Operaters" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="USER_ID" property="USER_ID" jdbcType="INTEGER" />
+    <result column="MODULE_ID" property="MODULE_ID" jdbcType="INTEGER" />
+    <result column="APPOINTMENT_NUMBER" property="APPOINTMENT_NUMBER" jdbcType="INTEGER" />
+    <result column="OPERATION_NUMBER" property="OPERATION_NUMBER" jdbcType="INTEGER" />
+    <result column="APPOINTMENT_ADDRESS" property="APPOINTMENT_ADDRESS" jdbcType="VARCHAR" />
+    <result column="APPOINTMENT_WINDOW" property="APPOINTMENT_WINDOW" jdbcType="VARCHAR" />
+    <result column="TIME" property="TIME" jdbcType="VARCHAR" />
+    <result column="VALID_TIME" property="VALID_TIME" jdbcType="VARCHAR" />
+    <result column="VALID_DAY" property="VALID_DAY" jdbcType="INTEGER" />
+    <result column="DAY" property="DAY" jdbcType="DATE" />
+    <result column="STATUS" property="STATUS" jdbcType="INTEGER" />
+    <result column="REMARKS1" property="REMARKS1" jdbcType="VARCHAR" />
+    <result column="REMARKS2" property="REMARKS2" jdbcType="VARCHAR" />
+    <result column="REMARKS3" property="REMARKS3" jdbcType="VARCHAR" />
+    <result column="REMARKS4" property="REMARKS4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, MODULE_ID, APPOINTMENT_NUMBER, OPERATION_NUMBER, APPOINTMENT_ADDRESS, 
+    APPOINTMENT_WINDOW, TIME, VALID_TIME, VALID_DAY, DAY, STATUS, REMARKS1, REMARKS2, 
+    REMARKS3, REMARKS4
+  </sql>
+  
+  <!--sql  -->
+   <select id="selectPageByDay" resultMap="BaseResultMap"  parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from operater
+    where DAY = #{day} and VALID_TIME=#{period}
+  </select>
+   <select id="selectNumberByDay" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select sum(APPOINTMENT_NUMBER) as APPOINTMENT_NUMBER,SUM(OPERATION_NUMBER) as OPERATION_NUMBER,DAY from operater
+    where DAY = #{day}
+  </select>
+  <!--end  -->
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from operater
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from operater
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.comit.appointment.modules.sys.entity.Operaters" >
+    insert into operater (ID, USER_ID, MODULE_ID, 
+      APPOINTMENT_NUMBER, OPERATION_NUMBER, APPOINTMENT_ADDRESS, 
+      APPOINTMENT_WINDOW, TIME, VALID_TIME, 
+      VALID_DAY, DAY, STATUS, 
+      REMARKS1, REMARKS2, REMARKS3, 
+      REMARKS4)
+    values (#{ID,jdbcType=INTEGER}, #{USER_ID,jdbcType=INTEGER}, #{MODULE_ID,jdbcType=INTEGER}, 
+      #{APPOINTMENT_NUMBER,jdbcType=INTEGER}, #{OPERATION_NUMBER,jdbcType=INTEGER}, #{APPOINTMENT_ADDRESS,jdbcType=VARCHAR}, 
+      #{APPOINTMENT_WINDOW,jdbcType=VARCHAR}, #{TIME,jdbcType=VARCHAR}, #{VALID_TIME,jdbcType=VARCHAR}, 
+      #{VALID_DAY,jdbcType=INTEGER}, #{DAY,jdbcType=DATE}, #{STATUS,jdbcType=INTEGER}, 
+      #{REMARKS1,jdbcType=VARCHAR}, #{REMARKS2,jdbcType=VARCHAR}, #{REMARKS3,jdbcType=VARCHAR}, 
+      #{REMARKS4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comit.appointment.modules.sys.entity.Operaters" >
+    insert into operater
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="USER_ID != null" >
+        USER_ID,
+      </if>
+      <if test="MODULE_ID != null" >
+        MODULE_ID,
+      </if>
+      <if test="APPOINTMENT_NUMBER != null" >
+        APPOINTMENT_NUMBER,
+      </if>
+      <if test="OPERATION_NUMBER != null" >
+        OPERATION_NUMBER,
+      </if>
+      <if test="APPOINTMENT_ADDRESS != null" >
+        APPOINTMENT_ADDRESS,
+      </if>
+      <if test="APPOINTMENT_WINDOW != null" >
+        APPOINTMENT_WINDOW,
+      </if>
+      <if test="TIME != null" >
+        TIME,
+      </if>
+      <if test="VALID_TIME != null" >
+        VALID_TIME,
+      </if>
+      <if test="VALID_DAY != null" >
+        VALID_DAY,
+      </if>
+      <if test="DAY != null" >
+        DAY,
+      </if>
+      <if test="STATUS != null" >
+        STATUS,
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1,
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2,
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3,
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="USER_ID != null" >
+        #{USER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="MODULE_ID != null" >
+        #{MODULE_ID,jdbcType=INTEGER},
+      </if>
+      <if test="APPOINTMENT_NUMBER != null" >
+        #{APPOINTMENT_NUMBER,jdbcType=INTEGER},
+      </if>
+      <if test="OPERATION_NUMBER != null" >
+        #{OPERATION_NUMBER,jdbcType=INTEGER},
+      </if>
+      <if test="APPOINTMENT_ADDRESS != null" >
+        #{APPOINTMENT_ADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="APPOINTMENT_WINDOW != null" >
+        #{APPOINTMENT_WINDOW,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        #{TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="VALID_TIME != null" >
+        #{VALID_TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="VALID_DAY != null" >
+        #{VALID_DAY,jdbcType=INTEGER},
+      </if>
+      <if test="DAY != null" >
+        #{DAY,jdbcType=DATE},
+      </if>
+      <if test="STATUS != null" >
+        #{STATUS,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comit.appointment.modules.sys.entity.Operaters" >
+    update operater
+    <set >
+      <if test="USER_ID != null" >
+        USER_ID = #{USER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="MODULE_ID != null" >
+        MODULE_ID = #{MODULE_ID,jdbcType=INTEGER},
+      </if>
+      <if test="APPOINTMENT_NUMBER != null" >
+        APPOINTMENT_NUMBER = #{APPOINTMENT_NUMBER,jdbcType=INTEGER},
+      </if>
+      <if test="OPERATION_NUMBER != null" >
+        OPERATION_NUMBER = #{OPERATION_NUMBER,jdbcType=INTEGER},
+      </if>
+      <if test="APPOINTMENT_ADDRESS != null" >
+        APPOINTMENT_ADDRESS = #{APPOINTMENT_ADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="APPOINTMENT_WINDOW != null" >
+        APPOINTMENT_WINDOW = #{APPOINTMENT_WINDOW,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        TIME = #{TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="VALID_TIME != null" >
+        VALID_TIME = #{VALID_TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="VALID_DAY != null" >
+        VALID_DAY = #{VALID_DAY,jdbcType=INTEGER},
+      </if>
+      <if test="DAY != null" >
+        DAY = #{DAY,jdbcType=DATE},
+      </if>
+      <if test="STATUS != null" >
+        STATUS = #{STATUS,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4 = #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comit.appointment.modules.sys.entity.Operaters" >
+    update operater
+    set USER_ID = #{USER_ID,jdbcType=INTEGER},
+      MODULE_ID = #{MODULE_ID,jdbcType=INTEGER},
+      APPOINTMENT_NUMBER = #{APPOINTMENT_NUMBER,jdbcType=INTEGER},
+      OPERATION_NUMBER = #{OPERATION_NUMBER,jdbcType=INTEGER},
+      APPOINTMENT_ADDRESS = #{APPOINTMENT_ADDRESS,jdbcType=VARCHAR},
+      APPOINTMENT_WINDOW = #{APPOINTMENT_WINDOW,jdbcType=VARCHAR},
+      TIME = #{TIME,jdbcType=VARCHAR},
+      VALID_TIME = #{VALID_TIME,jdbcType=VARCHAR},
+      VALID_DAY = #{VALID_DAY,jdbcType=INTEGER},
+      DAY = #{DAY,jdbcType=DATE},
+      STATUS = #{STATUS,jdbcType=INTEGER},
+      REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      REMARKS4 = #{REMARKS4,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

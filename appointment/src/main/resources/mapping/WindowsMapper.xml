@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comit.appointment.modules.sys.dao.WindowsMapper" >
+  <resultMap id="BaseResultMap" type="com.comit.appointment.modules.sys.entity.Windows" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="WINDOW_NAME" property="WINDOW_NAME" jdbcType="VARCHAR" />
+    <result column="WINDOW_AREA" property="WINDOW_AREA" jdbcType="VARCHAR" />
+    <result column="WINDOW_ADDRESS" property="WINDOW_ADDRESS" jdbcType="VARCHAR" />
+    <result column="OPERATOR_ID" property="OPERATOR_ID" jdbcType="INTEGER" />
+    <result column="OPERATOR_NAME" property="OPERATOR_NAME" jdbcType="VARCHAR" />
+    <result column="TIME" property="TIME" jdbcType="DATE" />
+    <result column="STATUS" property="STATUS" jdbcType="INTEGER" />
+    <result column="DEPT_ID" property="DEPT_ID" jdbcType="INTEGER" />
+    <result column="REMARKS1" property="REMARKS1" jdbcType="VARCHAR" />
+    <result column="REMARKS2" property="REMARKS2" jdbcType="VARCHAR" />
+    <result column="REMARKS3" property="REMARKS3" jdbcType="VARCHAR" />
+    <result column="REMARKS4" property="REMARKS4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, WINDOW_NAME, WINDOW_AREA, WINDOW_ADDRESS, OPERATOR_ID, OPERATOR_NAME, TIME, STATUS, 
+    DEPT_ID, REMARKS1, REMARKS2, REMARKS3, REMARKS4
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from window
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from window
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.comit.appointment.modules.sys.entity.Windows" >
+    insert into window (ID, WINDOW_NAME, WINDOW_AREA, 
+      WINDOW_ADDRESS, OPERATOR_ID, OPERATOR_NAME, 
+      TIME, STATUS, DEPT_ID, 
+      REMARKS1, REMARKS2, REMARKS3, 
+      REMARKS4)
+    values (#{ID,jdbcType=INTEGER}, #{WINDOW_NAME,jdbcType=VARCHAR}, #{WINDOW_AREA,jdbcType=VARCHAR}, 
+      #{WINDOW_ADDRESS,jdbcType=VARCHAR}, #{OPERATOR_ID,jdbcType=INTEGER}, #{OPERATOR_NAME,jdbcType=VARCHAR}, 
+      #{TIME,jdbcType=DATE}, #{STATUS,jdbcType=INTEGER}, #{DEPT_ID,jdbcType=INTEGER}, 
+      #{REMARKS1,jdbcType=VARCHAR}, #{REMARKS2,jdbcType=VARCHAR}, #{REMARKS3,jdbcType=VARCHAR}, 
+      #{REMARKS4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comit.appointment.modules.sys.entity.Windows" >
+    insert into window
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="WINDOW_NAME != null" >
+        WINDOW_NAME,
+      </if>
+      <if test="WINDOW_AREA != null" >
+        WINDOW_AREA,
+      </if>
+      <if test="WINDOW_ADDRESS != null" >
+        WINDOW_ADDRESS,
+      </if>
+      <if test="OPERATOR_ID != null" >
+        OPERATOR_ID,
+      </if>
+      <if test="OPERATOR_NAME != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="TIME != null" >
+        TIME,
+      </if>
+      <if test="STATUS != null" >
+        STATUS,
+      </if>
+      <if test="DEPT_ID != null" >
+        DEPT_ID,
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1,
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2,
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3,
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="WINDOW_NAME != null" >
+        #{WINDOW_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="WINDOW_AREA != null" >
+        #{WINDOW_AREA,jdbcType=VARCHAR},
+      </if>
+      <if test="WINDOW_ADDRESS != null" >
+        #{WINDOW_ADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="OPERATOR_ID != null" >
+        #{OPERATOR_ID,jdbcType=INTEGER},
+      </if>
+      <if test="OPERATOR_NAME != null" >
+        #{OPERATOR_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        #{TIME,jdbcType=DATE},
+      </if>
+      <if test="STATUS != null" >
+        #{STATUS,jdbcType=INTEGER},
+      </if>
+      <if test="DEPT_ID != null" >
+        #{DEPT_ID,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comit.appointment.modules.sys.entity.Windows" >
+    update window
+    <set >
+      <if test="WINDOW_NAME != null" >
+        WINDOW_NAME = #{WINDOW_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="WINDOW_AREA != null" >
+        WINDOW_AREA = #{WINDOW_AREA,jdbcType=VARCHAR},
+      </if>
+      <if test="WINDOW_ADDRESS != null" >
+        WINDOW_ADDRESS = #{WINDOW_ADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="OPERATOR_ID != null" >
+        OPERATOR_ID = #{OPERATOR_ID,jdbcType=INTEGER},
+      </if>
+      <if test="OPERATOR_NAME != null" >
+        OPERATOR_NAME = #{OPERATOR_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        TIME = #{TIME,jdbcType=DATE},
+      </if>
+      <if test="STATUS != null" >
+        STATUS = #{STATUS,jdbcType=INTEGER},
+      </if>
+      <if test="DEPT_ID != null" >
+        DEPT_ID = #{DEPT_ID,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4 = #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comit.appointment.modules.sys.entity.Windows" >
+    update window
+    set WINDOW_NAME = #{WINDOW_NAME,jdbcType=VARCHAR},
+      WINDOW_AREA = #{WINDOW_AREA,jdbcType=VARCHAR},
+      WINDOW_ADDRESS = #{WINDOW_ADDRESS,jdbcType=VARCHAR},
+      OPERATOR_ID = #{OPERATOR_ID,jdbcType=INTEGER},
+      OPERATOR_NAME = #{OPERATOR_NAME,jdbcType=VARCHAR},
+      TIME = #{TIME,jdbcType=DATE},
+      STATUS = #{STATUS,jdbcType=INTEGER},
+      DEPT_ID = #{DEPT_ID,jdbcType=INTEGER},
+      REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      REMARKS4 = #{REMARKS4,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comit.appointment.modules.sys.dao.ModulesMapper" >
+  <resultMap id="BaseResultMap" type="com.comit.appointment.modules.sys.entity.Modules" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="USER_ID" property="USER_ID" jdbcType="INTEGER" />
+    <result column="START_TIME" property="START_TIME" jdbcType="VARCHAR" />
+    <result column="END_TIME" property="END_TIME" jdbcType="VARCHAR" />
+    <result column="TIME" property="TIME" jdbcType="VARCHAR" />
+    <result column="APPOINTMENT_NUMBER" property="APPOINTMENT_NUMBER" jdbcType="INTEGER" />
+    <result column="VALID_TIME" property="VALID_TIME" jdbcType="VARCHAR" />
+    <result column="VERSION" property="VERSION" jdbcType="INTEGER" />
+    <result column="REMARKS1" property="REMARKS1" jdbcType="VARCHAR" />
+    <result column="REMARKS2" property="REMARKS2" jdbcType="VARCHAR" />
+    <result column="REMARKS3" property="REMARKS3" jdbcType="VARCHAR" />
+    <result column="REMARKS4" property="REMARKS4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, START_TIME, END_TIME, TIME, APPOINTMENT_NUMBER, VALID_TIME, VERSION, 
+    REMARKS1, REMARKS2, REMARKS3, REMARKS4
+  </sql>
+  
+  
+  <!--sql  -->
+   <select id="findModuleByVersion" resultMap="BaseResultMap" parameterType="com.comit.appointment.modules.sys.entity.Modules" >
+    select 
+    <include refid="Base_Column_List" />
+    from modules
+    where VERSION = #{VERSION}
+  </select>
+  <!--end  -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from modules
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from modules
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.comit.appointment.modules.sys.entity.Modules" >
+    insert into modules (ID, USER_ID, START_TIME, 
+      END_TIME, TIME, APPOINTMENT_NUMBER, 
+      VALID_TIME, VERSION, REMARKS1, 
+      REMARKS2, REMARKS3, REMARKS4
+      )
+    values (#{ID,jdbcType=INTEGER}, #{USER_ID,jdbcType=INTEGER}, #{START_TIME,jdbcType=VARCHAR}, 
+      #{END_TIME,jdbcType=VARCHAR}, #{TIME,jdbcType=VARCHAR}, #{APPOINTMENT_NUMBER,jdbcType=INTEGER}, 
+      #{VALID_TIME,jdbcType=VARCHAR}, #{VERSION,jdbcType=INTEGER}, #{REMARKS1,jdbcType=VARCHAR}, 
+      #{REMARKS2,jdbcType=VARCHAR}, #{REMARKS3,jdbcType=VARCHAR}, #{REMARKS4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.comit.appointment.modules.sys.entity.Modules" >
+    insert into modules
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="USER_ID != null" >
+        USER_ID,
+      </if>
+      <if test="START_TIME != null" >
+        START_TIME,
+      </if>
+      <if test="END_TIME != null" >
+        END_TIME,
+      </if>
+      <if test="TIME != null" >
+        TIME,
+      </if>
+      <if test="APPOINTMENT_NUMBER != null" >
+        APPOINTMENT_NUMBER,
+      </if>
+      <if test="VALID_TIME != null" >
+        VALID_TIME,
+      </if>
+      <if test="VERSION != null" >
+        VERSION,
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1,
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2,
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3,
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="USER_ID != null" >
+        #{USER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="START_TIME != null" >
+        #{START_TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="END_TIME != null" >
+        #{END_TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        #{TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="APPOINTMENT_NUMBER != null" >
+        #{APPOINTMENT_NUMBER,jdbcType=INTEGER},
+      </if>
+      <if test="VALID_TIME != null" >
+        #{VALID_TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="VERSION != null" >
+        #{VERSION,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comit.appointment.modules.sys.entity.Modules" >
+    update modules
+    <set >
+      <if test="USER_ID != null" >
+        USER_ID = #{USER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="START_TIME != null" >
+        START_TIME = #{START_TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="END_TIME != null" >
+        END_TIME = #{END_TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        TIME = #{TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="APPOINTMENT_NUMBER != null" >
+        APPOINTMENT_NUMBER = #{APPOINTMENT_NUMBER,jdbcType=INTEGER},
+      </if>
+      <if test="VALID_TIME != null" >
+        VALID_TIME = #{VALID_TIME,jdbcType=VARCHAR},
+      </if>
+      <if test="VERSION != null" >
+        VERSION = #{VERSION,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4 = #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comit.appointment.modules.sys.entity.Modules" >
+    update modules
+    set USER_ID = #{USER_ID,jdbcType=INTEGER},
+      START_TIME = #{START_TIME,jdbcType=VARCHAR},
+      END_TIME = #{END_TIME,jdbcType=VARCHAR},
+      TIME = #{TIME,jdbcType=VARCHAR},
+      APPOINTMENT_NUMBER = #{APPOINTMENT_NUMBER,jdbcType=INTEGER},
+      VALID_TIME = #{VALID_TIME,jdbcType=VARCHAR},
+      VERSION = #{VERSION,jdbcType=INTEGER},
+      REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      REMARKS4 = #{REMARKS4,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

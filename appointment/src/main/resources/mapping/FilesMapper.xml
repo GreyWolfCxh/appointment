@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comit.appointment.modules.sys.dao.FilesMapper" >
+  <resultMap id="BaseResultMap" type="com.comit.appointment.modules.sys.entity.Files" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="NEW_NAME" property="NEW_NAME" jdbcType="VARCHAR" />
+    <result column="ORIGINAL_NAME" property="ORIGINAL_NAME" jdbcType="VARCHAR" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+    <result column="UPLOAD_BY" property="UPLOAD_BY" jdbcType="VARCHAR" />
+    <result column="UPLOAD_DATE" property="UPLOAD_DATE" jdbcType="DATE" />
+    <result column="HREF" property="HREF" jdbcType="VARCHAR" />
+    <result column="STATUS" property="STATUS" jdbcType="VARCHAR" />
+    <result column="ILLEGAL_ID" property="ILLEGAL_ID" jdbcType="INTEGER" />
+    <result column="REMARKS1" property="REMARKS1" jdbcType="VARCHAR" />
+    <result column="REMARKS2" property="REMARKS2" jdbcType="VARCHAR" />
+    <result column="REMARKS3" property="REMARKS3" jdbcType="VARCHAR" />
+    <result column="REMARKS4" property="REMARKS4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NEW_NAME, ORIGINAL_NAME, TYPE, UPLOAD_BY, UPLOAD_DATE, HREF, STATUS, ILLEGAL_ID, 
+    REMARKS1, REMARKS2, REMARKS3, REMARKS4
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from file
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.comit.appointment.modules.sys.entity.Files" >
+    insert into file (ID, NEW_NAME, ORIGINAL_NAME, 
+      TYPE, UPLOAD_BY, UPLOAD_DATE, 
+      HREF, STATUS, ILLEGAL_ID, 
+      REMARKS1, REMARKS2, REMARKS3, 
+      REMARKS4)
+    values (#{ID,jdbcType=INTEGER}, #{NEW_NAME,jdbcType=VARCHAR}, #{ORIGINAL_NAME,jdbcType=VARCHAR}, 
+      #{TYPE,jdbcType=VARCHAR}, #{UPLOAD_BY,jdbcType=VARCHAR}, #{UPLOAD_DATE,jdbcType=DATE}, 
+      #{HREF,jdbcType=VARCHAR}, #{STATUS,jdbcType=VARCHAR}, #{ILLEGAL_ID,jdbcType=INTEGER}, 
+      #{REMARKS1,jdbcType=VARCHAR}, #{REMARKS2,jdbcType=VARCHAR}, #{REMARKS3,jdbcType=VARCHAR}, 
+      #{REMARKS4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comit.appointment.modules.sys.entity.Files" >
+    insert into file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="NEW_NAME != null" >
+        NEW_NAME,
+      </if>
+      <if test="ORIGINAL_NAME != null" >
+        ORIGINAL_NAME,
+      </if>
+      <if test="TYPE != null" >
+        TYPE,
+      </if>
+      <if test="UPLOAD_BY != null" >
+        UPLOAD_BY,
+      </if>
+      <if test="UPLOAD_DATE != null" >
+        UPLOAD_DATE,
+      </if>
+      <if test="HREF != null" >
+        HREF,
+      </if>
+      <if test="STATUS != null" >
+        STATUS,
+      </if>
+      <if test="ILLEGAL_ID != null" >
+        ILLEGAL_ID,
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1,
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2,
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3,
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="NEW_NAME != null" >
+        #{NEW_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="ORIGINAL_NAME != null" >
+        #{ORIGINAL_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TYPE != null" >
+        #{TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="UPLOAD_BY != null" >
+        #{UPLOAD_BY,jdbcType=VARCHAR},
+      </if>
+      <if test="UPLOAD_DATE != null" >
+        #{UPLOAD_DATE,jdbcType=DATE},
+      </if>
+      <if test="HREF != null" >
+        #{HREF,jdbcType=VARCHAR},
+      </if>
+      <if test="STATUS != null" >
+        #{STATUS,jdbcType=VARCHAR},
+      </if>
+      <if test="ILLEGAL_ID != null" >
+        #{ILLEGAL_ID,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comit.appointment.modules.sys.entity.Files" >
+    update file
+    <set >
+      <if test="NEW_NAME != null" >
+        NEW_NAME = #{NEW_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="ORIGINAL_NAME != null" >
+        ORIGINAL_NAME = #{ORIGINAL_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TYPE != null" >
+        TYPE = #{TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="UPLOAD_BY != null" >
+        UPLOAD_BY = #{UPLOAD_BY,jdbcType=VARCHAR},
+      </if>
+      <if test="UPLOAD_DATE != null" >
+        UPLOAD_DATE = #{UPLOAD_DATE,jdbcType=DATE},
+      </if>
+      <if test="HREF != null" >
+        HREF = #{HREF,jdbcType=VARCHAR},
+      </if>
+      <if test="STATUS != null" >
+        STATUS = #{STATUS,jdbcType=VARCHAR},
+      </if>
+      <if test="ILLEGAL_ID != null" >
+        ILLEGAL_ID = #{ILLEGAL_ID,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4 = #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comit.appointment.modules.sys.entity.Files" >
+    update file
+    set NEW_NAME = #{NEW_NAME,jdbcType=VARCHAR},
+      ORIGINAL_NAME = #{ORIGINAL_NAME,jdbcType=VARCHAR},
+      TYPE = #{TYPE,jdbcType=VARCHAR},
+      UPLOAD_BY = #{UPLOAD_BY,jdbcType=VARCHAR},
+      UPLOAD_DATE = #{UPLOAD_DATE,jdbcType=DATE},
+      HREF = #{HREF,jdbcType=VARCHAR},
+      STATUS = #{STATUS,jdbcType=VARCHAR},
+      ILLEGAL_ID = #{ILLEGAL_ID,jdbcType=INTEGER},
+      REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      REMARKS4 = #{REMARKS4,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

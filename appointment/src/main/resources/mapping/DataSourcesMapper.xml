@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.comit.appointment.modules.sys.dao.DataSourcesMapper" >
+  <resultMap id="BaseResultMap" type="com.comit.appointment.modules.sys.entity.DataSources" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="ILLEGAL_ID" property="ILLEGAL_ID" jdbcType="INTEGER" />
+    <result column="DATASOURCE_ZNAME" property="DATASOURCE_ZNAME" jdbcType="VARCHAR" />
+    <result column="DATASOURCE_ENAME" property="DATASOURCE_ENAME" jdbcType="VARCHAR" />
+    <result column="SQL_ID" property="SQL_ID" jdbcType="INTEGER" />
+    <result column="SQL_CODE" property="SQL_CODE" jdbcType="VARCHAR" />
+    <result column="STATUS" property="STATUS" jdbcType="INTEGER" />
+    <result column="REMARKS1" property="REMARKS1" jdbcType="VARCHAR" />
+    <result column="REMARKS2" property="REMARKS2" jdbcType="VARCHAR" />
+    <result column="REMARKS3" property="REMARKS3" jdbcType="VARCHAR" />
+    <result column="REMARKS4" property="REMARKS4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ILLEGAL_ID, DATASOURCE_ZNAME, DATASOURCE_ENAME, SQL_ID, SQL_CODE, STATUS, REMARKS1, 
+    REMARKS2, REMARKS3, REMARKS4
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from datasource
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from datasource
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.comit.appointment.modules.sys.entity.DataSources" >
+    insert into datasource (ID, ILLEGAL_ID, DATASOURCE_ZNAME, 
+      DATASOURCE_ENAME, SQL_ID, SQL_CODE, 
+      STATUS, REMARKS1, REMARKS2, 
+      REMARKS3, REMARKS4)
+    values (#{ID,jdbcType=INTEGER}, #{ILLEGAL_ID,jdbcType=INTEGER}, #{DATASOURCE_ZNAME,jdbcType=VARCHAR}, 
+      #{DATASOURCE_ENAME,jdbcType=VARCHAR}, #{SQL_ID,jdbcType=INTEGER}, #{SQL_CODE,jdbcType=VARCHAR}, 
+      #{STATUS,jdbcType=INTEGER}, #{REMARKS1,jdbcType=VARCHAR}, #{REMARKS2,jdbcType=VARCHAR}, 
+      #{REMARKS3,jdbcType=VARCHAR}, #{REMARKS4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.comit.appointment.modules.sys.entity.DataSources" >
+    insert into datasource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="ILLEGAL_ID != null" >
+        ILLEGAL_ID,
+      </if>
+      <if test="DATASOURCE_ZNAME != null" >
+        DATASOURCE_ZNAME,
+      </if>
+      <if test="DATASOURCE_ENAME != null" >
+        DATASOURCE_ENAME,
+      </if>
+      <if test="SQL_ID != null" >
+        SQL_ID,
+      </if>
+      <if test="SQL_CODE != null" >
+        SQL_CODE,
+      </if>
+      <if test="STATUS != null" >
+        STATUS,
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1,
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2,
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3,
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="ILLEGAL_ID != null" >
+        #{ILLEGAL_ID,jdbcType=INTEGER},
+      </if>
+      <if test="DATASOURCE_ZNAME != null" >
+        #{DATASOURCE_ZNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="DATASOURCE_ENAME != null" >
+        #{DATASOURCE_ENAME,jdbcType=VARCHAR},
+      </if>
+      <if test="SQL_ID != null" >
+        #{SQL_ID,jdbcType=INTEGER},
+      </if>
+      <if test="SQL_CODE != null" >
+        #{SQL_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="STATUS != null" >
+        #{STATUS,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.comit.appointment.modules.sys.entity.DataSources" >
+    update datasource
+    <set >
+      <if test="ILLEGAL_ID != null" >
+        ILLEGAL_ID = #{ILLEGAL_ID,jdbcType=INTEGER},
+      </if>
+      <if test="DATASOURCE_ZNAME != null" >
+        DATASOURCE_ZNAME = #{DATASOURCE_ZNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="DATASOURCE_ENAME != null" >
+        DATASOURCE_ENAME = #{DATASOURCE_ENAME,jdbcType=VARCHAR},
+      </if>
+      <if test="SQL_ID != null" >
+        SQL_ID = #{SQL_ID,jdbcType=INTEGER},
+      </if>
+      <if test="SQL_CODE != null" >
+        SQL_CODE = #{SQL_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="STATUS != null" >
+        STATUS = #{STATUS,jdbcType=INTEGER},
+      </if>
+      <if test="REMARKS1 != null" >
+        REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS2 != null" >
+        REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS3 != null" >
+        REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      </if>
+      <if test="REMARKS4 != null" >
+        REMARKS4 = #{REMARKS4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.comit.appointment.modules.sys.entity.DataSources" >
+    update datasource
+    set ILLEGAL_ID = #{ILLEGAL_ID,jdbcType=INTEGER},
+      DATASOURCE_ZNAME = #{DATASOURCE_ZNAME,jdbcType=VARCHAR},
+      DATASOURCE_ENAME = #{DATASOURCE_ENAME,jdbcType=VARCHAR},
+      SQL_ID = #{SQL_ID,jdbcType=INTEGER},
+      SQL_CODE = #{SQL_CODE,jdbcType=VARCHAR},
+      STATUS = #{STATUS,jdbcType=INTEGER},
+      REMARKS1 = #{REMARKS1,jdbcType=VARCHAR},
+      REMARKS2 = #{REMARKS2,jdbcType=VARCHAR},
+      REMARKS3 = #{REMARKS3,jdbcType=VARCHAR},
+      REMARKS4 = #{REMARKS4,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>
